@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sudeeksha Dixit — Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1917; --ink-muted: #5c5a56; --ink-faint: #9b9890;
+    --paper: #faf9f6; --paper-warm: #f3f0ea; --border: rgba(26,25,23,0.1); --border-mid: rgba(26,25,23,0.18);
+    --teal: #1a6b5a; --teal-light: #e4f0ec;
+    --coral: #c74b2a; --coral-light: #faeae4;
+    --purple: #4a3fb5; --purple-light: #eceafa;
+    --amber: #8a5c0a; --amber-light: #fdf0d8;
+    --blue: #1c4f8a; --blue-light: #e4edf8;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* PAGE SYSTEM */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 60px;
+    background: rgba(250,249,246,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name {
+    font-family: var(--serif); font-size: 22px; color: var(--ink);
+    text-decoration: none; letter-spacing: -0.01em; cursor: pointer;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-resume {
+    font-size: 12px; font-weight: 500; color: var(--ink);
+    border: 1px solid var(--border-mid); padding: 6px 16px; border-radius: 20px;
+    text-decoration: none; transition: background 0.2s; cursor: pointer;
+  }
+  .nav-resume:hover { background: var(--paper-warm); }
+
+  /* SECTIONS */
+  section { padding: 100px 5vw; }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; padding-bottom: 80px; position: relative; overflow: hidden; }
+  #hero::before { content: ''; position: absolute; top: -60px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(26,107,90,0.06) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 960px; margin: 0 auto; width: 100%; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--teal); text-transform: uppercase; margin-bottom: 1.5rem; }
+  .hero-tag::before { content: ''; width: 20px; height: 1px; background: var(--teal); }
+  h1 { font-family: var(--serif); font-size: clamp(40px, 6vw, 72px); line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.5rem; max-width: 800px; }
+  h1 em { font-style: italic; color: var(--ink-muted); }
+  .hero-sub { font-size: 17px; font-weight: 300; color: var(--ink-muted); max-width: 520px; line-height: 1.65; margin-bottom: 2.5rem; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4rem; }
+  .btn-primary { font-size: 14px; font-weight: 500; background: var(--ink); color: var(--paper); padding: 12px 28px; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost { font-size: 14px; font-weight: 400; color: var(--ink-muted); padding: 12px 28px; border-radius: 4px; border: 1px solid var(--border-mid); text-decoration: none; background: transparent; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+  .hero-stats { display: flex; gap: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .stat-num { font-family: var(--serif); font-size: 30px; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+  .stat-lbl { font-size: 12px; color: var(--ink-faint); font-weight: 400; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .section-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.25rem; }
+  h2 { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 42px); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+  .about-body p { font-size: 15px; color: var(--ink-muted); line-height: 1.75; margin-bottom: 1rem; }
+  .skills-group { margin-bottom: 1.75rem; }
+  .skills-group-title { font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag { font-size: 12px; color: var(--ink-muted); background: var(--paper); border: 1px solid var(--border); padding: 4px 12px; border-radius: 20px; }
+
+  /* EXPERIENCE */
+  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border); }
+  .exp-item:first-child { padding-top: 0; }
+  .exp-company { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .exp-period { font-size: 12px; color: var(--ink-faint); margin-bottom: 4px; }
+  .exp-loc { font-size: 12px; color: var(--ink-faint); }
+  .exp-role { font-family: var(--serif); font-size: 20px; color: var(--ink); margin-bottom: 12px; letter-spacing: -0.01em; }
+  .exp-points { list-style: none; }
+  .exp-points li { font-size: 14px; color: var(--ink-muted); line-height: 1.65; margin-bottom: 8px; padding-left: 16px; position: relative; }
+  .exp-points li::before { content: '—'; position: absolute; left: 0; color: var(--ink-faint); font-size: 11px; top: 3px; }
+  .exp-highlights { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .exp-pill { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
+
+  /* WORK */
+  .work-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+  .filter-tabs { display: flex; gap: 6px; }
+  .filter-tab { font-size: 12px; font-weight: 400; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--ink-muted); cursor: pointer; transition: all 0.15s; }
+  .filter-tab.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .project-card { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; cursor: pointer; }
+  .project-card:hover { border-color: var(--border-mid); transform: translateY(-2px); }
+  .project-card[data-hidden="true"] { display: none; }
+  .card-accent { height: 3px; }
+  .card-body { padding: 1.5rem; }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .card-tag { font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.03em; }
+  .card-title { font-family: var(--serif); font-size: 20px; color: var(--ink); line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .card-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.65; margin-bottom: 1.25rem; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .card-tools { font-size: 11px; color: var(--ink-faint); }
+  .card-link { font-size: 12px; font-weight: 500; color: var(--ink-muted); text-decoration: none; display: flex; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; transition: color 0.15s; font-family: var(--sans); }
+  .card-link:hover { color: var(--ink); }
+  .card-link svg { width: 12px; height: 12px; }
+
+  /* EDUCATION */
+  .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .edu-card { background: var(--paper-warm); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
+  .edu-degree { font-family: var(--serif); font-size: 16px; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
+  .edu-school { font-size: 13px; color: var(--ink-muted); margin-bottom: 4px; }
+  .edu-year { font-size: 12px; color: var(--ink-faint); }
+  .edu-note { display: inline-block; font-size: 11px; font-weight: 500; margin-top: 10px; padding: 2px 9px; border-radius: 20px; background: var(--teal-light); color: var(--teal); }
+
+  /* CONTACT */
+  .contact-section { background: var(--ink); color: var(--paper); text-align: center; padding: 80px 5vw; }
+  .contact-section h2 { color: var(--paper); margin-bottom: 1rem; }
+  .contact-section p { font-size: 16px; color: rgba(250,249,246,0.55); max-width: 400px; margin: 0 auto 2.5rem; line-height: 1.65; }
+  .contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .contact-link { font-size: 13px; font-weight: 500; padding: 10px 24px; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; cursor: pointer; }
+  .contact-link.primary { background: var(--paper); color: var(--ink); }
+  .contact-link.ghost { border: 1px solid rgba(250,249,246,0.2); color: rgba(250,249,246,0.7); }
+  .contact-link:hover { opacity: 0.8; }
+
+  /* FOOTER */
+  footer { background: var(--ink); border-top: 1px solid rgba(250,249,246,0.08); padding: 1.5rem 5vw; display: flex; align-items: center; justify-content: space-between; }
+  footer p { font-size: 12px; color: rgba(250,249,246,0.3); }
+
+  /* CASE STUDY PAGE */
+  .cs-hero { padding: 120px 5vw 60px; background: var(--paper-warm); border-bottom: 1px solid var(--border); }
+  .cs-back { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-muted); background: none; border: none; cursor: pointer; font-family: var(--sans); margin-bottom: 2rem; transition: color 0.2s; }
+  .cs-back:hover { color: var(--ink); }
+  .cs-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1rem; }
+  .cs-title { font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.25rem; max-width: 700px; }
+  .cs-summary { font-size: 16px; color: var(--ink-muted); max-width: 600px; line-height: 1.7; margin-bottom: 2rem; }
+  .cs-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .cs-meta-item { }
+  .cs-meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-faint); margin-bottom: 3px; }
+  .cs-meta-val { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .cs-body { padding: 60px 5vw; }
+  .cs-body .container { max-width: 720px; }
+  .cs-section { margin-bottom: 3.5rem; }
+  .cs-section h3 { font-family: var(--serif); font-size: 24px; color: var(--ink); margin-bottom: 1rem; letter-spacing: -0.01em; }
+  .cs-section p { font-size: 15px; color: var(--ink-muted); line-height: 1.8; margin-bottom: 1rem; }
+  .cs-section ul { list-style: none; margin-bottom: 1rem; }
+  .cs-section ul li { font-size: 15px; color: var(--ink-muted); line-height: 1.7; padding-left: 20px; margin-bottom: 8px; position: relative; }
+  .cs-section ul li::before { content: '—'; position: absolute; left: 0; color: var(--ink-faint); font-size: 11px; top: 4px; }
+  .cs-highlight { background: var(--paper-warm); border-left: 3px solid var(--teal); padding: 1.25rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; }
+  .cs-highlight p { font-size: 15px; color: var(--ink); font-style: italic; margin: 0; }
+  .cs-metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  .cs-metric { background: var(--paper-warm); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+  .cs-metric-num { font-family: var(--serif); font-size: 28px; color: var(--ink); margin-bottom: 4px; }
+  .cs-metric-lbl { font-size: 12px; color: var(--ink-faint); }
+  .cs-tag { display: inline-flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .cs-pill { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-tag { animation: fadeUp 0.6s ease both 0.1s; }
+  .home-page h1 { animation: fadeUp 0.6s ease both 0.2s; }
+  .hero-sub { animation: fadeUp 0.6s ease both 0.3s; }
+  .hero-btns { animation: fadeUp 0.6s ease both 0.4s; }
+  .hero-stats { animation: fadeUp 0.6s ease both 0.5s; }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .nav-links { display: none; }
+    .cs-metric-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name" onclick="showPage('home')">Sudeeksha Dixit</span>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home'); scrollToSection('about')">About</a></li>
+    <li><a onclick="showPage('home'); scrollToSection('work')">Work</a></li>
+    <li><a onclick="showPage('home'); scrollToSection('experience')">Experience</a></li>
+    <li><a onclick="showPage('home'); scrollToSection('contact')">Contact</a></li>
+  </ul>
+  <a class="nav-resume" href="Sudeeksha_Dixit_Resume.pdf">Resume ↓</a>
+</nav>
+
+<!-- ===================== HOME PAGE ===================== -->
+<div id="page-home" class="page home-page active">
+
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Product Manager · B2B SaaS</div>
+      <h1>Product strategy,<br>growth <em>&</em> analytics.</h1>
+      <p class="hero-sub">I help B2B SaaS teams turn customer problems into structured product decisions. Background in engineering, analytics, and market research automation using AI.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="scrollToSection('work')">View my work</button>
+        <button class="btn-ghost" onclick="scrollToSection('contact')">Get in touch</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">£5M+</div><div class="stat-lbl">product opportunity pipeline shaped</div></div>
+        <div><div class="stat-num">40%</div><div class="stat-lbl">research efficiency improvement</div></div>
+        <div><div class="stat-num">25%</div><div class="stat-lbl">engagement increase from experiments</div></div>
+        <div><div class="stat-num">3</div><div class="stat-lbl">product concepts added to roadmap</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="background:var(--paper-warm)">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-body">
+          <p class="section-eyebrow">About me</p>
+          <h2>Engineer turned product thinker.</h2>
+          <p>I started my career as a programmer analyst at Cognizant, working with cross-functional teams on testing, quality assurance, and client delivery. That foundation shaped how I think about product.</p>
+          <p>At ITWCP in Southampton, I moved into product strategy: running discovery, validating product concepts, using GenAI to automate research workflows, and working with engineering and design to ship features that moved the needle.</p>
+          <p>I'm building a portfolio that spans B2B SaaS product management and organic growth strategy — the intersection of where I want to go next.</p>
+        </div>
+        <div>
+          <div class="skills-group">
+            <div class="skills-group-title">Product</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Product Discovery</span><span class="skill-tag">Roadmap Planning</span><span class="skill-tag">PRDs</span><span class="skill-tag">User Stories</span><span class="skill-tag">A/B Testing</span><span class="skill-tag">KPI Tracking</span><span class="skill-tag">Go-to-Market</span><span class="skill-tag">Agile / Scrum</span>
+            </div>
+          </div>
+          <div class="skills-group">
+            <div class="skills-group-title">Data & Tools</div>
+            <div class="skill-tags">
+              <span class="skill-tag">SQL</span><span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">Excel</span><span class="skill-tag">JIRA</span><span class="skill-tag">Notion</span><span class="skill-tag">GenAI / Prompting</span><span class="skill-tag">Google Analytics</span>
+            </div>
+          </div>
+          <div class="skills-group">
+            <div class="skills-group-title">Strategy</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Market Research</span><span class="skill-tag">Competitive Intelligence</span><span class="skill-tag">Customer Segmentation</span><span class="skill-tag">Growth Strategy</span><span class="skill-tag">Sustainability Analytics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" style="background:var(--paper-warm); padding-top:80px">
+    <div class="container">
+      <div class="work-header">
+        <div>
+          <p class="section-eyebrow">Selected work</p>
+          <h2>Projects & case studies.</h2>
+        </div>
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="filterCards('all', this)">All</button>
+          <button class="filter-tab" onclick="filterCards('pm', this)">Product</button>
+          <button class="filter-tab" onclick="filterCards('growth', this)">Growth</button>
+        </div>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card" data-type="pm">
+          <div class="card-accent" style="background:#1a6b5a"></div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag" style="background:#e4f0ec;color:#1a6b5a">PM</span>
+              <span class="card-tag" style="background:#e4f0ec;color:#1a6b5a">PRD</span>
+              <span class="card-tag" style="background:#f3f0ea;color:#5c5a56">Case Study</span>
+            </div>
+            <div class="card-title">Reducing late deliveries on Swiggy</div>
+            <div class="card-desc">Identified the communication gap behind late deliveries. Designed 3 features: proactive delay notifications, a redesigned tracking screen, and an automatic recovery offer.</div>
+            <div class="card-footer">
+              <span class="card-tools">Notion · Wireframes · PRD</span>
+              <button class="card-link" onclick="showPage('cs-swiggy')">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-type="pm">
+          <div class="card-accent" style="background:#4a3fb5"></div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag" style="background:#eceafa;color:#4a3fb5">PM</span>
+              <span class="card-tag" style="background:#eceafa;color:#4a3fb5">Internal Tool</span>
+              <span class="card-tag" style="background:#fdf0d8;color:#8a5c0a">AI</span>
+            </div>
+            <div class="card-title">ResearchOS — Internal AI research tool PRD</div>
+            <div class="card-desc">Full PRD for a tool that standardises AI-assisted research across teams. Anchored in real experience cutting research cycle time by 40% at ITWCP. Includes personas, user stories, MoSCoW, and success metrics.</div>
+            <div class="card-footer">
+              <span class="card-tools">Notion · Excel · ChatGPT</span>
+              <button class="card-link" onclick="showPage('cs-researchos')">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-type="growth">
+          <div class="card-accent" style="background:#c74b2a"></div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag" style="background:#faeae4;color:#c74b2a">Growth</span>
+              <span class="card-tag" style="background:#faeae4;color:#c74b2a">Content</span>
+              <span class="card-tag" style="background:#f3f0ea;color:#5c5a56">B2B SaaS</span>
+            </div>
+            <div class="card-title">LinkedIn content engine — 30-day B2B strategy</div>
+            <div class="card-desc">Designed a 4-post-type content framework for a fictional B2B SaaS. Built a 12-post calendar, tracked engagement by post type in Excel, and discovered tactical posts drove 3× more saves than story posts.</div>
+            <div class="card-footer">
+              <span class="card-tools">Excel · Notion · Google Analytics</span>
+              <button class="card-link" onclick="showPage('cs-linkedin')">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-type="growth">
+          <div class="card-accent" style="background:#1c4f8a"></div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag" style="background:#e4edf8;color:#1c4f8a">Growth</span>
+              <span class="card-tag" style="background:#e4edf8;color:#1c4f8a">GTM</span>
+              <span class="card-tag" style="background:#faeae4;color:#c74b2a">Demand Gen</span>
+            </div>
+            <div class="card-title">PipelineOS — AI feature GTM & demand generation</div>
+            <div class="card-desc">Zero-paid-ads GTM for a new AI forecasting feature. Segmented 3 ICPs in Excel, wrote 9 targeted emails, designed a one-pager + battle card + demo script, and mapped 8 intent-driven blog posts.</div>
+            <div class="card-footer">
+              <span class="card-tools">Excel · Canva · Google Analytics</span>
+              <button class="card-link" onclick="showPage('cs-pipelineos')">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <p class="section-eyebrow">Experience</p>
+      <h2>Where I've worked.</h2>
+      <div style="margin-top:3rem">
+        <div class="exp-item">
+          <div>
+            <div class="exp-company">ITWCP</div>
+            <div class="exp-period">Jul 2024 – Oct 2025</div>
+            <div class="exp-loc">Southampton, UK</div>
+          </div>
+          <div>
+            <div class="exp-role">Product Manager — Product Strategy & Market Insights</div>
+            <ul class="exp-points">
+              <li>Led end-to-end product discovery and roadmap planning, validating 3 product concepts added to the annual roadmap</li>
+              <li>Conducted customer interviews that shaped a £5M+ product opportunity pipeline</li>
+              <li>Automated market intelligence workflows using GenAI and prompt engineering — improving research efficiency by 40%</li>
+              <li>Launched growth experiments and feature improvements that increased engagement by 25% and lead generation by 15%</li>
+              <li>Delivered 2 product pilots through Agile sprints in collaboration with engineering and design</li>
+            </ul>
+            <div class="exp-highlights">
+              <span class="exp-pill" style="background:#e4f0ec;color:#1a6b5a">£5M+ pipeline</span>
+              <span class="exp-pill" style="background:#eceafa;color:#4a3fb5">40% efficiency gain</span>
+              <span class="exp-pill" style="background:#faeae4;color:#c74b2a">25% engagement ↑</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div>
+            <div class="exp-company">Cognizant</div>
+            <div class="exp-period">Feb 2021 – Jun 2022</div>
+            <div class="exp-loc">Chennai, India (Remote)</div>
+          </div>
+          <div>
+            <div class="exp-role">Programmer Analyst — Analytics & Quality Assurance</div>
+            <ul class="exp-points">
+              <li>Executed unit, manual and automated testing with 100% issue-detection accuracy</li>
+              <li>Reduced software errors by 60%, cutting resolution time by 20%</li>
+              <li>Collaborated with 15+ member cross-functional teams to drive project delivery</li>
+              <li>Supported client demos and UAT cycles with a 95% feature acceptance rate</li>
+            </ul>
+            <div class="exp-highlights">
+              <span class="exp-pill" style="background:#fdf0d8;color:#8a5c0a">60% error reduction</span>
+              <span class="exp-pill" style="background:#e4edf8;color:#1c4f8a">95% acceptance rate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--paper-warm)">
+    <div class="container">
+      <p class="section-eyebrow">Education</p>
+      <h2>Academic background.</h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-degree">MSc International Management</div>
+          <div class="edu-school">University of Southampton, UK</div>
+          <div class="edu-year">Sept 2022 – Dec 2023</div>
+          <span class="edu-note">Merit</span>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">B.E. Electronics & Communication Engineering</div>
+          <div class="edu-school">SRM University, India</div>
+          <div class="edu-year">July 2017 – Jun 2021</div>
+          <span class="edu-note" style="background:#e4edf8;color:#1c4f8a">85.87%</span>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">AI Career Accelerator Program</div>
+          <div class="edu-school">Be10x · IIT · Remote</div>
+          <div class="edu-year">Feb 2026 – Ongoing</div>
+          <span class="edu-note" style="background:#eceafa;color:#4a3fb5">In progress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="contact" class="contact-section">
+    <div class="container">
+      <p class="section-eyebrow" style="color:rgba(250,249,246,0.4)">Get in touch</p>
+      <h2>Let's work together.</h2>
+      <p>Open to B2B SaaS product and growth roles. Based in India, open to remote.</p>
+      <div class="contact-links">
+        <a href="mailto:sud1202dixit@gmail.com" class="contact-link primary">sud1202dixit@gmail.com</a>
+        <a href="https://www.linkedin.com/in/sudeeksha-dixit" target="_blank" class="contact-link ghost">LinkedIn ↗</a>
+        <a href="#" class="contact-link ghost">Download resume</a>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>© 2026 Sudeeksha Dixit</p>
+    <p>+91 7275040791</p>
+  </footer>
+</div>
+
+<!-- ===================== CASE STUDY: SWIGGY ===================== -->
+<div id="page-cs-swiggy" class="page">
+  <div class="cs-hero">
+    <div class="container">
+      <button class="cs-back" onclick="showPage('home')">← Back to work</button>
+      <p class="cs-eyebrow">Product Management · Case Study Exercise</p>
+      <div class="cs-title">Reducing late deliveries on Swiggy</div>
+      <p class="cs-summary">Analysed Swiggy's delivery experience as a user and product thinker. Identified that the core problem wasn't logistics — it was the silence. Designed a solution focused on communication and trust.</p>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><div class="cs-meta-label">Type</div><div class="cs-meta-val">PM Case Study Exercise</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-label">Deliverables</div><div class="cs-meta-val">PRD + Wireframes</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-label">Tools</div><div class="cs-meta-val">Notion · Google Sheets</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="container">
+      <div class="cs-section">
+        <h3>The problem</h3>
+        <p>As a regular Swiggy user, I've experienced late deliveries — and the frustrating part wasn't always the delay itself. It was not knowing why. The estimated time would sit static on screen while the delivery partner had clearly stopped moving, with no explanation.</p>
+        <p>I pulled public data from app store reviews and Reddit threads to validate this wasn't just my experience. The consistent pattern: users weren't only frustrated by lateness — they were frustrated by the silence.</p>
+        <div class="cs-highlight"><p>"Most churn happens not because something went wrong — but because nobody said anything when it did."</p></div>
+      </div>
+      <div class="cs-section">
+        <h3>Root cause analysis</h3>
+        <p>I mapped the late delivery experience into three failure layers:</p>
+        <ul>
+          <li>Logistics — restaurant prep time underestimation, traffic, partner availability</li>
+          <li>Communication — app doesn't update ETA in real time, no proactive notification sent</li>
+          <li>Recovery — support is reactive, no automatic gesture offered after a bad experience</li>
+        </ul>
+        <p>I focused on the communication and recovery layers — these are product problems, faster to ship, and directly what users complained about.</p>
+      </div>
+      <div class="cs-section">
+        <h3>Proposed solution — 3 features</h3>
+        <ul>
+          <li><strong>Feature 1 (P0) — Proactive delay notification:</strong> When the system detects an order is 10+ minutes late, automatically send a plain-language push notification with the reason and revised ETA. "Your delivery partner is stuck in traffic near Koramangala. New ETA: 8:47 PM."</li>
+          <li><strong>Feature 2 (P1) — Redesigned tracking screen:</strong> Add a status strip with delay reason + revised ETA in a yellow banner. No user action needed — just honesty, surfaced automatically.</li>
+          <li><strong>Feature 3 (P2) — Automatic recovery offer:</strong> If an order arrives 15+ minutes late, automatically trigger a small coupon — without the user needing to complain. Turns a bad moment into a loyalty gesture.</li>
+        </ul>
+      </div>
+      <div class="cs-section">
+        <h3>Wireframes</h3>
+        <p>Four screens showing the before state and the three redesigned features — drawn as low-fidelity wireframes to communicate layout and logic, not visual design.</p>
+        <div style="overflow-x:auto;margin:1.5rem 0">
+        <div style="display:grid;grid-template-columns:repeat(4,160px);gap:14px;min-width:700px">
+
+          <!-- Screen 1: Before -->
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <span style="font-size:10px;font-weight:500;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em">Before</span>
+              <span style="font-size:10px;font-weight:500;padding:2px 7px;border-radius:8px;background:#faeae4;color:#c74b2a">Current</span>
+            </div>
+            <div style="background:#f3f0ea;border-radius:14px;padding:10px;border:1px solid var(--border)">
+              <div style="background:#FC8019;border-radius:6px 6px 0 0;padding:7px 10px;display:flex;justify-content:space-between;margin:-10px -10px 10px">
+                <span style="font-size:10px;font-weight:500;color:#fff">Swiggy</span>
+                <span style="font-size:10px;color:#fff">9:14 PM</span>
+              </div>
+              <div style="font-size:10px;font-weight:500;color:var(--ink);margin-bottom:8px">Order tracking</div>
+              <div style="background:#e4f0ec;border-radius:6px;height:72px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;border:1px solid #9FE1CB">
+                <div style="width:8px;height:8px;background:#FC8019;border-radius:50%"></div>
+                <div style="width:40px;height:1.5px;background:#1a6b5a;margin:0 5px"></div>
+                <div style="width:7px;height:7px;background:#1c4f8a;border-radius:2px"></div>
+              </div>
+              <div style="background:#fff;border-radius:5px;padding:7px 8px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:10px;color:var(--ink-faint)">Arriving by</span>
+                <span style="font-size:13px;font-weight:500;color:var(--ink)">9:32 PM</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:3px;margin-bottom:4px">
+                <div style="width:7px;height:7px;border-radius:50%;background:#1a6b5a"></div>
+                <div style="flex:1;height:1.5px;background:#1a6b5a"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#1a6b5a"></div>
+                <div style="flex:1;height:1.5px;background:#1a6b5a"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#FC8019"></div>
+                <div style="flex:1;height:1.5px;background:var(--border)"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:var(--border)"></div>
+              </div>
+              <div style="font-size:9px;color:var(--ink-faint);text-align:center;margin-top:6px">Timer static. No delay info.</div>
+            </div>
+            <p style="font-size:11px;color:var(--ink-muted);margin-top:8px;line-height:1.4">ETA never updates. User has no idea what's happening.</p>
+          </div>
+
+          <!-- Screen 2: Redesigned delay state -->
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <span style="font-size:10px;font-weight:500;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em">Feature 1</span>
+              <span style="font-size:10px;font-weight:500;padding:2px 7px;border-radius:8px;background:#e4f0ec;color:#1a6b5a">After</span>
+            </div>
+            <div style="background:#f3f0ea;border-radius:14px;padding:10px;border:1px solid var(--border)">
+              <div style="background:#FC8019;border-radius:6px 6px 0 0;padding:7px 10px;display:flex;justify-content:space-between;margin:-10px -10px 10px">
+                <span style="font-size:10px;font-weight:500;color:#fff">Swiggy</span>
+                <span style="font-size:10px;color:#fff">9:14 PM</span>
+              </div>
+              <div style="font-size:10px;font-weight:500;color:var(--ink);margin-bottom:8px">Order tracking</div>
+              <div style="background:#e4f0ec;border-radius:6px;height:72px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;border:1px solid #9FE1CB">
+                <div style="width:8px;height:8px;background:#FC8019;border-radius:50%"></div>
+                <div style="width:40px;height:1.5px;background:#1a6b5a;margin:0 5px"></div>
+                <div style="width:7px;height:7px;background:#1c4f8a;border-radius:2px"></div>
+              </div>
+              <div style="background:#FAEEDA;border-left:3px solid #BA7517;padding:7px 8px;margin-bottom:8px">
+                <div style="font-size:10px;font-weight:500;color:#633806;margin-bottom:2px">⏱ Running a little late</div>
+                <div style="font-size:9px;color:#854F0B">Traffic near HSR Layout. New ETA: 9:44 PM</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:3px">
+                <div style="width:7px;height:7px;border-radius:50%;background:#1a6b5a"></div>
+                <div style="flex:1;height:1.5px;background:#1a6b5a"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#1a6b5a"></div>
+                <div style="flex:1;height:1.5px;background:#1a6b5a"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#FC8019"></div>
+                <div style="flex:1;height:1.5px;background:var(--border)"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:var(--border)"></div>
+              </div>
+            </div>
+            <p style="font-size:11px;color:var(--ink-muted);margin-top:8px;line-height:1.4">Delay banner auto-appears. Plain-language reason + revised ETA.</p>
+          </div>
+
+          <!-- Screen 3: Push notification -->
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <span style="font-size:10px;font-weight:500;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em">Feature 2</span>
+              <span style="font-size:10px;font-weight:500;padding:2px 7px;border-radius:8px;background:#e4f0ec;color:#1a6b5a">After</span>
+            </div>
+            <div style="background:#2C2C2A;border-radius:14px;padding:10px;border:1px solid #444">
+              <div style="display:flex;justify-content:space-between;margin-bottom:14px">
+                <span style="font-size:10px;color:rgba(255,255,255,0.5)">9:18 PM</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4)">Lock screen</span>
+              </div>
+              <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:9px 10px;margin-bottom:7px">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:14px;height:14px;background:#FC8019;border-radius:3px;flex-shrink:0"></div>
+                  <span style="font-size:10px;font-weight:500;color:rgba(255,255,255,0.8)">Swiggy</span>
+                  <span style="font-size:9px;color:rgba(255,255,255,0.4);margin-left:auto">now</span>
+                </div>
+                <p style="font-size:10px;color:rgba(255,255,255,0.85);line-height:1.5">Traffic near your area. New ETA: <strong>9:44 PM</strong>. Sorry for the wait!</p>
+              </div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:9px 10px;opacity:.4">
+                <div style="font-size:10px;color:rgba(255,255,255,0.4)">Earlier notification…</div>
+              </div>
+            </div>
+            <p style="font-size:11px;color:var(--ink-muted);margin-top:8px;line-height:1.4">Proactive push on delay detection. User doesn't need to open the app.</p>
+          </div>
+
+          <!-- Screen 4: Recovery offer -->
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <span style="font-size:10px;font-weight:500;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em">Feature 3</span>
+              <span style="font-size:10px;font-weight:500;padding:2px 7px;border-radius:8px;background:#e4f0ec;color:#1a6b5a">After</span>
+            </div>
+            <div style="background:#f3f0ea;border-radius:14px;padding:10px;border:1px solid var(--border)">
+              <div style="background:#FC8019;border-radius:6px 6px 0 0;padding:7px 10px;margin:-10px -10px 10px">
+                <span style="font-size:10px;font-weight:500;color:#fff">Swiggy</span>
+              </div>
+              <div style="text-align:center;padding:8px 0 6px">
+                <div style="font-size:18px;color:#1a6b5a;margin-bottom:3px">✓</div>
+                <div style="font-size:12px;font-weight:500;color:var(--ink)">Order delivered</div>
+                <div style="font-size:9px;color:var(--ink-faint);margin-top:2px">9:51 PM · 19 min late</div>
+              </div>
+              <div style="border-top:1px solid var(--border);margin:8px 0"></div>
+              <div style="background:#e4f0ec;border-radius:6px;padding:8px 9px;display:flex;align-items:flex-start;gap:7px">
+                <span style="font-size:15px">🎁</span>
+                <div>
+                  <div style="font-size:11px;font-weight:500;color:#0F6E56">₹50 off your next order</div>
+                  <div style="font-size:9px;color:#085041;margin-top:2px">Sorry for the wait. Valid 7 days.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:6px;margin-top:8px">
+                <div style="flex:1;border:1px solid var(--border);border-radius:5px;padding:5px;text-align:center;font-size:9px;color:var(--ink-muted)">Rate order</div>
+                <div style="flex:1;border:1px solid var(--border);border-radius:5px;padding:5px;text-align:center;font-size:9px;color:var(--ink-muted)">Need help?</div>
+              </div>
+            </div>
+            <p style="font-size:11px;color:var(--ink-muted);margin-top:8px;line-height:1.4">Auto coupon if 15+ min late. No complaint needed. Loyalty moment.</p>
+          </div>
+
+        </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h3>Success metrics</h3>
+        <div class="cs-metric-row">
+          <div class="cs-metric"><div class="cs-metric-num">−30%</div><div class="cs-metric-lbl">support contacts per delayed order</div></div>
+          <div class="cs-metric"><div class="cs-metric-num">+15%</div><div class="cs-metric-lbl">post-delay reorder rate (7 days)</div></div>
+          <div class="cs-metric"><div class="cs-metric-num">+40%</div><div class="cs-metric-lbl">tracking screen engagement during delays</div></div>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h3>What I learned</h3>
+        <p>Communication is a product feature. Shipping better delay notifications is faster, cheaper, and immediately measurable — while the underlying logistics problem takes months to fix. Empathy mapping helped me realise users wanted to feel respected and informed, not just to receive faster food.</p>
+      </div>
+    </div>
+  </div>
+  <footer style="background:var(--ink);border-top:1px solid rgba(250,249,246,0.08);padding:1.5rem 5vw;display:flex;align-items:center;justify-content:space-between;">
+    <p style="font-size:12px;color:rgba(250,249,246,0.3)">© 2026 Sudeeksha Dixit</p>
+    <button onclick="showPage('home')" style="font-size:12px;color:rgba(250,249,246,0.4);background:none;border:none;cursor:pointer;">← Back to portfolio</button>
+  </footer>
+</div>
+
+<!-- ===================== CASE STUDY: RESEARCHOS ===================== -->
+<div id="page-cs-researchos" class="page">
+  <div class="cs-hero">
+    <div class="container">
+      <button class="cs-back" onclick="showPage('home')">← Back to work</button>
+      <p class="cs-eyebrow">Product Management · PRD</p>
+      <div class="cs-title">ResearchOS — Internal AI research tool</div>
+      <p class="cs-summary">A full PRD for a tool that standardises how teams use AI for research. Directly anchored in a real experience at ITWCP where I cut research cycle time by 40% — and then thought about what that system would look like properly built.</p>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><div class="cs-meta-label">Type</div><div class="cs-meta-val">Product Management · PRD</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-label">Deliverables</div><div class="cs-meta-val">PRD · Personas · MoSCoW · Metrics</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-label">Tools</div><div class="cs-meta-val">Notion · Excel · ChatGPT</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="container">
+      <div class="cs-section">
+        <h3>Real-world anchor</h3>
+        <p>At ITWCP, I automated parts of our market research workflow using GenAI and prompt engineering — cutting cycle time by 40%. But it was scrappy: prompts lived in my personal ChatGPT window, outputs weren't saved, and nothing was reusable by the team. ResearchOS is the version I would have built with more time.</p>
+      </div>
+      <div class="cs-section">
+        <h3>The problem</h3>
+        <ul>
+          <li>Everyone uses different prompts — inconsistent output quality across the team</li>
+          <li>Research outputs live in personal chat windows — insights get lost, nothing is searchable</li>
+          <li>New joiners start from zero — no access to prompts the team has already refined</li>
+        </ul>
+      </div>
+      <div class="cs-section">
+        <h3>Personas</h3>
+        <ul>
+          <li><strong>Priya (PM):</strong> Spends 30 mins per research task just figuring out how to prompt. Needs consistent, fast output so she can focus on decisions.</li>
+          <li><strong>Rohan (Analyst):</strong> Rewrites the same prompts every week. Needs a library he can pull from so each week builds on the last.</li>
+          <li><strong>Nina (New joiner):</strong> Uncertain whether her AI outputs match the team's quality. Needs guided templates from day one.</li>
+        </ul>
+      </div>
+      <div class="cs-section">
+        <h3>Must-have features (v1)</h3>
+        <ul>
+          <li>Prompt template library categorised by task type (competitor scan, interview synthesis, market sizing)</li>
+          <li>Run prompt → structured output (not raw chat window)</li>
+          <li>Save output with title, date, analyst name, and tags</li>
+          <li>Basic search by tag or keyword across saved outputs</li>
+          <li>Paste text or upload a document to analyse</li>
+        </ul>
+      </div>
+      <div class="cs-section">
+        <h3>How the tool works — end-to-end workflow</h3>
+        <p>From opening the tool to a saved, searchable output — the full flow in one view.</p>
+        <div style="margin:1.5rem 0;overflow-x:auto">
+        <div style="min-width:600px">
+
+          <!-- Flow steps -->
+          <div style="display:flex;align-items:stretch;gap:0;margin-bottom:1.5rem">
+
+            <div style="flex:1;background:var(--paper-warm);border:1px solid var(--border);border-radius:8px 0 0 8px;padding:14px 12px;text-align:center">
+              <div style="font-size:20px;margin-bottom:6px">📂</div>
+              <div style="font-size:12px;font-weight:500;color:var(--ink);margin-bottom:3px">Open tool</div>
+              <div style="font-size:11px;color:var(--ink-faint)">Team login</div>
+            </div>
+            <div style="display:flex;align-items:center;padding:0 4px;color:var(--ink-faint);font-size:16px">→</div>
+
+            <div style="flex:1;background:#eceafa;border:1px solid #c9c5f0;padding:14px 12px;text-align:center">
+              <div style="font-size:20px;margin-bottom:6px">📋</div>
+              <div style="font-size:12px;font-weight:500;color:#4a3fb5;margin-bottom:3px">Pick template</div>
+              <div style="font-size:11px;color:#6b62c9">e.g. competitor scan</div>
+            </div>
+            <div style="display:flex;align-items:center;padding:0 4px;color:var(--ink-faint);font-size:16px">→</div>
+
+            <div style="flex:1;background:#e4f0ec;border:1px solid #9FE1CB;padding:14px 12px;text-align:center">
+              <div style="font-size:20px;margin-bottom:6px">📄</div>
+              <div style="font-size:12px;font-weight:500;color:#1a6b5a;margin-bottom:3px">Add content</div>
+              <div style="font-size:11px;color:#1a6b5a">paste text or upload</div>
+            </div>
+            <div style="display:flex;align-items:center;padding:0 4px;color:var(--ink-faint);font-size:16px">→</div>
+
+            <div style="flex:1;background:#fdf0d8;border:1px solid #e8c97a;padding:14px 12px;text-align:center">
+              <div style="font-size:20px;margin-bottom:6px">⚡</div>
+              <div style="font-size:12px;font-weight:500;color:#8a5c0a;margin-bottom:3px">Run analysis</div>
+              <div style="font-size:11px;color:#8a5c0a">structured output</div>
+            </div>
+            <div style="display:flex;align-items:center;padding:0 4px;color:var(--ink-faint);font-size:16px">→</div>
+
+            <div style="flex:1;background:#e4f0ec;border:1px solid #9FE1CB;padding:14px 12px;text-align:center">
+              <div style="font-size:20px;margin-bottom:6px">💾</div>
+              <div style="font-size:12px;font-weight:500;color:#1a6b5a;margin-bottom:3px">Save to library</div>
+              <div style="font-size:11px;color:#1a6b5a">title + tags</div>
+            </div>
+            <div style="display:flex;align-items:center;padding:0 4px;color:var(--ink-faint);font-size:16px">→</div>
+
+            <div style="flex:1;background:#eceafa;border:1px solid #c9c5f0;border-radius:0 8px 8px 0;padding:14px 12px;text-align:center">
+              <div style="font-size:20px;margin-bottom:6px">🔍</div>
+              <div style="font-size:12px;font-weight:500;color:#4a3fb5;margin-bottom:3px">Team search</div>
+              <div style="font-size:11px;color:#6b62c9">anyone can find it</div>
+            </div>
+
+          </div>
+
+          <!-- Before vs After comparison -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="background:#faeae4;border:1px solid #f5c4b4;border-radius:8px;padding:14px 16px">
+              <div style="font-size:11px;font-weight:500;color:#c74b2a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Before ResearchOS</div>
+              <ul style="list-style:none;padding:0">
+                <li style="font-size:12px;color:#712B13;padding:4px 0;border-bottom:1px solid rgba(199,75,42,0.15);display:flex;gap:8px"><span>✗</span><span>Prompts in personal ChatGPT — lost after session</span></li>
+                <li style="font-size:12px;color:#712B13;padding:4px 0;border-bottom:1px solid rgba(199,75,42,0.15);display:flex;gap:8px"><span>✗</span><span>6–8 hrs per research task</span></li>
+                <li style="font-size:12px;color:#712B13;padding:4px 0;border-bottom:1px solid rgba(199,75,42,0.15);display:flex;gap:8px"><span>✗</span><span>New joiners start from scratch every time</span></li>
+                <li style="font-size:12px;color:#712B13;padding:4px 0;display:flex;gap:8px"><span>✗</span><span>No audit trail — duplicate research common</span></li>
+              </ul>
+            </div>
+            <div style="background:#e4f0ec;border:1px solid #9FE1CB;border-radius:8px;padding:14px 16px">
+              <div style="font-size:11px;font-weight:500;color:#1a6b5a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">After ResearchOS</div>
+              <ul style="list-style:none;padding:0">
+                <li style="font-size:12px;color:#0d4a3b;padding:4px 0;border-bottom:1px solid rgba(26,107,90,0.15);display:flex;gap:8px"><span>✓</span><span>Shared prompt library — team knowledge compounds</span></li>
+                <li style="font-size:12px;color:#0d4a3b;padding:4px 0;border-bottom:1px solid rgba(26,107,90,0.15);display:flex;gap:8px"><span>✓</span><span>Under 4 hrs per research task</span></li>
+                <li style="font-size:12px;color:#0d4a3b;padding:4px 0;border-bottom:1px solid rgba(26,107,90,0.15);display:flex;gap:8px"><span>✓</span><span>New joiners productive within 2 hours</span></li>
+                <li style="font-size:12px;color:#0d4a3b;padding:4px 0;display:flex;gap:8px"><span>✓</span><span>Full output log — searchable by anyone</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h3>Success metrics</h3>
+        <div class="cs-metric-row">
+          <div class="cs-metric"><div class="cs-metric-num">&lt;4h</div><div class="cs-metric-lbl">avg. research task time (from 6–8h)</div></div>
+          <div class="cs-metric"><div class="cs-metric-num">70%+</div><div class="cs-metric-lbl">outputs saved to shared library</div></div>
+          <div class="cs-metric"><div class="cs-metric-num">50%+</div><div class="cs-metric-lbl">tasks using existing templates</div></div>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h3>What I learned</h3>
+        <p>Internal tools fail on adoption, not features. The key insight: saving an output should be one click, not a 5-field form. The discipline of writing a proper PRD — with personas, prioritisation, and measurable outcomes — is itself the skill being demonstrated here.</p>
+      </div>
+    </div>
+  </div>
+  <footer style="background:var(--ink);border-top:1px solid rgba(250,249,246,0.08);padding:1.5rem 5vw;display:flex;align-items:center;justify-content:space-between;">
+    <p style="font-size:12px;color:rgba(250,249,246,0.3)">© 2026 Sudeeksha Dixit</p>
+    <button onclick="showPage('home')" style="font-size:12px;color:rgba(250,249,246,0.4);background:none;border:none;cursor:pointer;">← Back to portfolio</button>
+  </footer>
+</div>
+
+<!-- ===================== CASE STUDY: LINKEDIN ===================== -->
+<div id="page-cs-linkedin" class="page">
+  <div class="cs-hero">
+    <div class="container">
+      <button class="cs-back" onclick="showPage('home')">← Back to work</button>
+      <p class="cs-eyebrow">Growth Marketing · Content Strategy</p>
+      <div class="cs-title">LinkedIn content engine — 30-day B2B strategy</div>
+      <p class="cs-summary">Designed a full 30-day organic content strategy for Loopify, a fictional B2B SaaS targeting customer success teams. Built the framework, calendar, tracking system, and derived data-backed insights.</p>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><div class="cs-meta-label">Type</div><div class="cs-meta-val">Growth Marketing</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-label">Deliverables</div><div class="cs-meta-val">Content calendar · Excel tracker · Insights</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-label">Tools</div><div class="cs-meta-val">Excel · Notion · Google Analytics</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="container">
+      <div class="cs-section">
+        <h3>The problem</h3>
+        <p>Most B2B SaaS companies post on LinkedIn without a strategy — company news, product updates, occasional blog reposts. Flat engagement, no compounding effect, no inbound. I wanted to design what a proper organic LinkedIn engine looks like for an early-stage B2B SaaS with a small marketing function.</p>
+      </div>
+      <div class="cs-section">
+        <h3>The framework — 4 post types</h3>
+        <ul>
+          <li><strong>Insight:</strong> Counterintuitive take. Makes the target audience nod or disagree. Builds credibility.</li>
+          <li><strong>Tactical:</strong> Framework or numbered list. Something they can use today. Drives saves.</li>
+          <li><strong>Story:</strong> First-person honest moment. What went wrong, what I learned. Builds trust.</li>
+          <li><strong>Proof:</strong> Mini outcome story. Outcome-first, no direct sell. Drives inbound profile visits.</li>
+        </ul>
+        <p>3 posts per week, rotating through all 4 types so the feed never feels repetitive. No two "proof" posts in a row.</p>
+      </div>
+      <div class="cs-section">
+        <h3>What the data showed</h3>
+        <div class="cs-highlight"><p>Tactical posts drove 3× more saves than story posts. Proof posts drove the most profile visits — outcome-first stories sent people to the page to find out what Loopify actually is.</p></div>
+        <p>Every post ending with "link in bio" or "DM me" saw ~30% lower impressions. LinkedIn suppresses outbound intent in the algorithm — the fix was giving all the value in the post and letting curious readers come to you.</p>
+      </div>
+      <div class="cs-section">
+        <h3>Modelled results — 30 days</h3>
+        <div class="cs-metric-row">
+          <div class="cs-metric"><div class="cs-metric-num">~4.2K</div><div class="cs-metric-lbl">weekly impressions (from ~800)</div></div>
+          <div class="cs-metric"><div class="cs-metric-num">5.1%</div><div class="cs-metric-lbl">avg. engagement rate (from 1.5%)</div></div>
+          <div class="cs-metric"><div class="cs-metric-num">9</div><div class="cs-metric-lbl">inbound DMs / soft leads</div></div>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h3>What I learned</h3>
+        <p>Consistency beats quality in month one. Three good posts per week beats one great post every two weeks. And organic LinkedIn is a slow channel — the data doesn't become meaningful until week 6–8. The trap is changing strategy before you have enough signal.</p>
+      </div>
+    </div>
+  </div>
+  <footer style="background:var(--ink);border-top:1px solid rgba(250,249,246,0.08);padding:1.5rem 5vw;display:flex;align-items:center;justify-content:space-between;">
+    <p style="font-size:12px;color:rgba(250,249,246,0.3)">© 2026 Sudeeksha Dixit</p>
+    <button onclick="showPage('home')" style="font-size:12px;color:rgba(250,249,246,0.4);background:none;border:none;cursor:pointer;">← Back to portfolio</button>
+  </footer>
+</div>
+
+<!-- ===================== CASE STUDY: PIPELINEOS ===================== -->
+<div id="page-cs-pipelineos" class="page">
+  <div class="cs-hero">
+    <div class="container">
+      <button class="cs-back" onclick="showPage('home')">← Back to work</button>
+      <p class="cs-eyebrow">Growth Marketing · GTM Strategy</p>
+      <div class="cs-title">PipelineOS — AI feature GTM & demand generation</div>
+      <p class="cs-summary">Built a complete zero-paid-ads GTM plan for a new AI forecasting feature at a fictional RevOps SaaS. Segmented the ICP, wrote targeted email sequences, designed sales collateral, and mapped an intent-driven content calendar.</p>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><div class="cs-meta-label">Type</div><div class="cs-meta-val">Growth Marketing</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-label">Deliverables</div><div class="cs-meta-val">ICP map · Email sequences · Sales collateral · Content plan</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-label">Tools</div><div class="cs-meta-val">Excel · Canva · Notion · Google Analytics</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="container">
+      <div class="cs-section">
+        <h3>The problem</h3>
+        <p>PipelineOS shipped a new AI forecasting feature with no GTM plan. Sales didn't know how to position it. Marketing hadn't touched it. The feature existed — and nobody outside the team knew. This is one of the most common ways good features die quietly at early-stage B2B SaaS companies.</p>
+      </div>
+      <div class="cs-section">
+        <h3>ICP segmentation</h3>
+        <p>I mapped 3 buyer segments in Excel before writing a single word of copy:</p>
+        <ul>
+          <li><strong>Primary — Head of RevOps (50–200 employees):</strong> Manual forecasting eating 6+ hours per week. Message: "Get your Monday back."</li>
+          <li><strong>Secondary — VP of Sales (100–500 employees):</strong> Forecast accuracy too low to plan hiring. Message: "Stop guessing, start planning."</li>
+          <li><strong>Stretch — Founder / COO (10–50 employees):</strong> No dedicated ops team. Message: "One tool, no analyst needed."</li>
+        </ul>
+      </div>
+      <div class="cs-section">
+        <h3>What I built</h3>
+        <ul>
+          <li>9 targeted emails (3 per segment) — each under 150 words, one CTA, triggered by behaviour not just day count</li>
+          <li>One-pager: feature benefits + one proof point, designed in Canva</li>
+          <li>Battle card: 5 objections + 5 responses for sales reps who need to explain AI forecasting simply</li>
+          <li>Demo script: 10-minute flow with context-setting, walkthrough, and Q&A prompts</li>
+          <li>8 intent-driven blog posts mapped to each ICP and tracked in Google Analytics</li>
+        </ul>
+      </div>
+      <div class="cs-section">
+        <h3>Modelled results — 6 weeks</h3>
+        <div class="cs-metric-row">
+          <div class="cs-metric"><div class="cs-metric-num">24%</div><div class="cs-metric-lbl">feature adoption (from 7% baseline)</div></div>
+          <div class="cs-metric"><div class="cs-metric-num">~10%</div><div class="cs-metric-lbl">email CTR to demo page</div></div>
+          <div class="cs-metric"><div class="cs-metric-num">~12</div><div class="cs-metric-lbl">demo requests from content alone</div></div>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h3>What I learned</h3>
+        <p>GTM is a coordination problem, not a content problem. Features die quietly because sales, marketing, and product never agreed on the ICP before launch. Segmentation before writing changes every downstream piece — the angle, the proof point, the CTA. The battle card and demo script were the most immediately useful assets. Content takes weeks to rank. A battle card helps the sales team on Monday.</p>
+      </div>
+    </div>
+  </div>
+  <footer style="background:var(--ink);border-top:1px solid rgba(250,249,246,0.08);padding:1.5rem 5vw;display:flex;align-items:center;justify-content:space-between;">
+    <p style="font-size:12px;color:rgba(250,249,246,0.3)">© 2026 Sudeeksha Dixit</p>
+    <button onclick="showPage('home')" style="font-size:12px;color:rgba(250,249,246,0.4);background:none;border:none;cursor:pointer;">← Back to portfolio</button>
+  </footer>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function scrollToSection(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
+}
+
+function filterCards(type, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(card => {
+    if (type === 'all' || card.dataset.type === type) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
